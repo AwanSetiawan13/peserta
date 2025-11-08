@@ -493,24 +493,32 @@
 
   <!-- 🔹 Popup Payment -->
   <div class="popup" id="paymentPopup">
-    <div class="popup-content">
-      <h3>Pembayaran Paket</h3>
-      <div class="popup-data" id="paymentData">
-        <p><b>Paket:</b> <span id="paymentPaket"></span></p>
-        <p><b>Harga:</b> <span id="paymentHarga"></span></p>
-        <label for="kupon">Masukkan Kupon</label>
-        <input type="text" id="kupon" placeholder="Kode Kupon">
-        <p><b>Scan QR untuk pembayaran:</b></p>
-        <img src="images/Gambar QRS.jpg" alt="QR Payment" style="width:200px; display:block; margin:10px auto;">
-        <label for="buktiPayment">Upload Bukti Pembayaran</label>
-        <input type="file" id="buktiPayment" accept="image/*">
-      </div>
-      <div style="text-align:center;">
-        <button class="yes" onclick="showConfirmation()">Konfirmasi Pembayaran</button>
-        <button class="no" onclick="closePaymentPopup()">Batal</button>
-      </div>
+  <div class="popup-content">
+    <h3>Pembayaran Paket</h3>
+    <div class="popup-data" id="paymentData">
+      <p><b>Paket:</b> <span id="paymentPaket"></span></p>
+      <p><b>Harga:</b> <span id="paymentHarga"></span></p>
+
+      <!-- Kupon -->
+      <label for="kupon">Masukkan Kupon</label>
+<input type="text" id="kupon" placeholder="Masukkan kode kupon" style="padding:12px; border-radius:8px; border:1px solid #ccc; font-size:15px; width:100%; margin-bottom:10px;" oninput="updateHargaKupon()">
+
+<p><b>Harga setelah diskon:</b> <span id="hargaDiskon"></span></p>
+
+
+      <p><b>Scan QR untuk pembayaran:</b></p>
+      <img src="images/Gambar QRS.jpg" alt="QR Payment" style="width:200px; display:block; margin:10px auto; border-radius:8px;">
+
+      <!-- Upload Bukti Pembayaran -->
+      <label for="buktiPayment">Upload Bukti Pembayaran</label>
+      <input type="file" id="buktiPayment" accept="image/*" style="padding:12px; border-radius:8px; border:1px solid #ccc; font-size:15px; width:100%; margin-bottom:15px;">
+    </div>
+    <div style="text-align:center;">
+      <button class="yes" onclick="showConfirmation()">Konfirmasi Pembayaran</button>
+      <button class="no" onclick="closePaymentPopup()">Batal</button>
     </div>
   </div>
+</div>
 
   <!-- 🔹 Popup konfirmasi -->
   <div class="popup" id="popup">
@@ -643,6 +651,30 @@
       document.getElementById("paymentPopup").style.display = "none";
     }
   </script>
+
+  <script>
+  // Daftar kupon dan diskonnya
+  const kuponList = {
+    "BISA10": 0.1,   // diskon 10%
+    "EVENT50": 0.5   // diskon 50%
+  };
+
+  function updateHargaKupon() {
+    const kuponInput = document.getElementById("kupon").value.trim().toUpperCase();
+    let hargaText = document.getElementById("paymentHarga").innerText;
+    let harga = parseInt(hargaText.replace(/[^0-9]/g, ''));
+
+    let hargaFinal = harga; // default harga awal
+    if (kuponList[kuponInput]) {
+      const diskon = kuponList[kuponInput];
+      hargaFinal = Math.round(harga * (1 - diskon));
+    }
+
+    document.getElementById("hargaDiskon").innerText = "Rp." + hargaFinal.toLocaleString();
+  }
+</script>
+
+
 </body>
 
 </html>
