@@ -147,6 +147,23 @@
       color: #222;
     }
 
+    .layanan-list p {
+      position: relative;
+      padding-left: 30px;
+      margin: 5px 0;
+      font-size: 13px;
+      text-align: left;
+    }
+
+    .layanan-list p::before {
+      content: "✔";
+      color: #25D366;
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
     /* 🔹 Popup konfirmasi & payment */
     .popup {
       display: none;
@@ -262,6 +279,13 @@
     @media (max-width: 600px) {
       .container {
         width: 100vw;
+      }
+      .layanan {
+        flex-direction: column;
+      }
+
+      .layanan-box {
+        min-width: 100%;
       }
     }
 
