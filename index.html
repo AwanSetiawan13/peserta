@@ -245,38 +245,30 @@
 
     /* VISI MISI */
     .visi-container {
-      display: flex;
-      align-items: flex-start;
-      gap: 20px;
-      margin-top: 20px;
-    }
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 0–5px; /* jarak rapi antara gambar dan konten */
+}
 
-    .visi-misi {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
+.misi {
+  flex: 1;
+  min-width: 300px;
+}
 
-    .visi,
-    .misi {
-      /* border: 2px solid #004aad; */
-      border-radius: 10px;
-      padding: 15px;
-      background: #fff;
-    }
+.misi h4 {
+  color: #004aad;
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
 
-    .visi h4,
-    .misi h4 {
-      margin-bottom: 8px;
-      color: #004aad;
-    }
-
-    .misi ol {
-      padding-left: 20px;
-      font-size: 14px;
-      line-height: 1.6;
-    }
+.misi ol {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  padding-left: 20px;
+}
 
     .foto {
       flex: 1;
@@ -488,26 +480,8 @@
     <!-- HERO IMAGE -->
     <section class="section-images">
       <img src="images/Bagian1.jpg" alt="Bagian 1">
+
     </section>
-
-    <!-- STATISTIK -->
-    <!-- <section class="section-11">
-      <div class="stats">
-        <div class="stat-box">
-          <h3>Tanggal</h3>
-          <p>Rabu, 17 Desember 2025</p>
-        </div>
-        <div class="stat-box">
-          <h3>Tempat</h3>
-          <p>Hotel Santika, Kota Tasikmalaya</p>
-        </div>
-        <div class="stat-box">
-          <h3>Kreator</h3>
-          <p>300–400 kreator </p>
-        </div>
-      </div>
-    </section> -->
-
 
     <!-- MAIN CONTENT -->
     <section class="section-images">
@@ -515,51 +489,38 @@
         Daftar Sekarang
       </div>
       <img src="images/Bagian2.jpg" alt="Bagian 2">
-      <!-- <p>
-        Event ini bukan sekadar pameran, melainkan ajang matchmaking antara brand, seller, dan kreator TikTok aktif.
-        Seller akan dikenal langsung oleh ratusan kreator serta MCN Bisa Media, mendapat booth display profesional, dan
-        kesempatan produknya direview serta dijual melalui konten kreator, baik Live Streaming maupun Short Video untuk
-        meningkatkan penjualan dan brand awareness.
-      </p>
 
-      <p>
-        Selain itu, seller juga bisa berkolaborasi langsung dengan kreator sesuai niche produk dan terhubung ke jaringan
-        affiliate melalui link TAP. Semua promosi akan didukung Monitoring iklan GMV max produk maupun GMV max Live oleh
-        advertising profesional Bisa Media, sehingga seller mendapatkan hasil maksimal dari setiap kolaborasi yang
-        terjalin.
-      </p> -->
-
-      <section>
-        <div class="visi-container"
-          style="display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; flex-wrap: wrap;">
-          <div class="misi" style="flex: 1; min-width: 300px;">
-            <h4 style="color: #004aad; font-size: 1rem; margin-bottom: 10px;">Dunia digital sekarang bukan cuma soal
-              nonton konten, tapi juga bagaimana kamu bisa cuan dari konten. Di event Si Paling Affiliate, kamu bakal:
-            </h4>
-            <ol style="font-size: 0.9rem; line-height: 1.4; padding-left: 20px;">
-              <li>Belajar langsung dari kreator sukses Kak Tiara yang udah hasilin jutaan rupiah dari TikTok</li>
-              <li>Belajar dari TOP Kreator TiktokShop Partner sebagai TOP 1 GMV 1M 3 bulan berturut-turut di Bisa Media
-                MCN</li>
-              <li>Belajar langsung dengan Certified External Trainer TiktokShop by Tokopedia sekaligus mentor Bisa Media
-                MCN</li>
-              <li>Bertemu langsung dengan brand-brand besar di event matchmaking</li>
-              <li>Dapat materi eksklusif dan sesi sharing inspiratif dari pembicara berpengalaman</li>
-              <li>Dapat produk sampel & goodie bag senilai Rp150.000–Rp750.000</li>
-              <li>Bisa langsung jadi affiliate & mulai jualan produk setelah event berlangsung!</li>
-              <li>Berpeluang kolaborasi dengan brand - brand besar</li>
-              <li>Berpeluang sharing session secara langsung dengan kak Tiara ketika lunch and break</li>
-              <li>Mendapatkan penghasilan tambahan dari tiktok affiliate</li>
-              <li>Berpeluang mendapatkan Doorprize dan Grandprize</li>
-            </ol>
-          </div>
+      <div class="visi-container"
+        style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; flex-wrap: wrap; margin-top: 0–5px;">
+        <div class="misi" style="flex: 1; min-width: 300px;">
+          <h4 style="color: #004aad; font-size: 1rem; margin-bottom: 10px;">
+            Dunia digital sekarang bukan cuma soal nonton konten, tapi juga bagaimana kamu bisa cuan dari konten.
+            Di event Si Paling Affiliate, kamu bakal:
+          </h4>
+          <ol style="font-size: 0.9rem; line-height: 1.4; padding-left: 20px;">
+            <li>Belajar langsung dari kreator sukses Kak Tiara yang udah hasilin jutaan rupiah dari TikTok</li>
+            <li>Belajar dari TOP Kreator TiktokShop Partner sebagai TOP 1 GMV 1M 3 bulan berturut-turut di Bisa Media
+              MCN</li>
+            <li>Belajar langsung dengan Certified External Trainer TiktokShop by Tokopedia sekaligus mentor Bisa Media
+              MCN</li>
+            <li>Bertemu langsung dengan brand-brand besar di event matchmaking</li>
+            <li>Dapat materi eksklusif dan sesi sharing inspiratif dari pembicara berpengalaman</li>
+            <li>Dapat produk sampel & goodie bag senilai Rp150.000–Rp750.000</li>
+            <li>Bisa langsung jadi affiliate & mulai jualan produk setelah event berlangsung!</li>
+            <li>Berpeluang kolaborasi dengan brand - brand besar</li>
+            <li>Berpeluang sharing session secara langsung dengan kak Tiara ketika lunch and break</li>
+            <li>Mendapatkan penghasilan tambahan dari tiktok affiliate</li>
+            <li>Berpeluang mendapatkan Doorprize dan Grandprize</li>
+          </ol>
         </div>
-      </section>
+      </div>
+
 
       <img src="images/Bagian5.jpg" alt="Bagian 3">
 
       <section>
         <div class="visi-container"
-          style="display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; flex-wrap: wrap;">
+          style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; flex-wrap: wrap; margin-top: 0–5px;">
           <div class="misi" style="flex: 1; min-width: 300px;">
             <h4 style="color: #004aad; font-size: 1rem; margin-bottom: 10px;">Event ini cocok banget buat kamu yang:
             </h4>
@@ -579,7 +540,7 @@
 
       <section>
         <div class="visi-container"
-          style="display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; flex-wrap: wrap;">
+          style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; flex-wrap: wrap; margin-top: 0–5px;">
           <div class="misi" style="flex: 1; min-width: 300px;">
             <h4 style="color: #004aad; font-size: 1rem; margin-bottom: 10px;">TikTok Affiliate adalah cara paling
               cepat untuk dapet penghasilan dari konten.
@@ -598,7 +559,7 @@
 
       <section>
         <div class="visi-container"
-          style="display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; flex-wrap: wrap;">
+          style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; flex-wrap: wrap; margin-top: 0–5px;">
           <div class="misi" style="flex: 1; min-width: 300px;">
             <h4 style="color: #004aad; font-size: 1rem; margin-bottom: 10px;">Benefit Peserta
             </h4>
@@ -825,7 +786,7 @@
       </div>
 
       <div class="visi-container"
-        style="display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; flex-wrap: wrap;">
+        style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; flex-wrap: wrap; margin-top: 0–5px;">
         <div class="misi" style="flex: 1; min-width: 300px;">
           <h4 style="color: #004aad; font-size: 1rem; margin-bottom: 10px;">Pembicara & Guest Star:</h4>
           <ol style="font-size: 0.9rem; line-height: 1.4; padding-left: 20px;">
@@ -1024,7 +985,7 @@ Terima kasih!`;
         transform: scale(1.2);
       }
     </style>
-    
+
   </div>
 </body>
 
