@@ -54,7 +54,7 @@
       flex-direction: column;
       align-items: center;
       gap: 30px;
-      padding: 40px 40px;
+      padding: 40px;
     }
 
     .aduh img {
@@ -100,7 +100,6 @@
       font-size: 15px;
     }
 
-
     .contact-form button {
       background-color: #25D366;
       color: white;
@@ -116,14 +115,6 @@
     .contact-form button:hover {
       background-color: #1ebe5d;
       transform: translateY(-2px);
-    }
-
-    footer {
-      background: #004aad;
-      color: #fff;
-      text-align: center;
-      padding: 15px;
-      margin-top: 50px;
     }
 
     .layanan {
@@ -150,8 +141,13 @@
       font-weight: 700;
     }
 
+    .package-total {
+      margin-top: 10px;
+      font-weight: 600;
+      color: #222;
+    }
 
-    /* 🔹 Popup konfirmasi */
+    /* 🔹 Popup konfirmasi & payment */
     .popup {
       display: none;
       position: fixed;
@@ -191,6 +187,18 @@
       padding: 15px 20px;
       border-radius: 10px;
       margin-bottom: 20px;
+      max-height: 300px;
+      /* tinggi maksimum container popup */
+      overflow-y: auto;
+      /* scroll vertical jika konten melebihi tinggi */
+    }
+
+    .popup-data img {
+      display: block;
+      width: 100px;
+      border-radius: 8px;
+      margin: 10px auto;
+      /* gambar di tengah */
     }
 
     .popup-content button {
@@ -256,10 +264,47 @@
         width: 100vw;
       }
     }
+
+    /* Footer social */
+    footer {
+      text-align: center;
+      padding: 20px 10px;
+      background-color: #004aad;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .social-links {
+      margin-top: 10px;
+    }
+
+    .social-links a {
+      margin: 0 8px;
+      display: inline-block;
+    }
+
+    .icon {
+      width: 28px;
+      height: 28px;
+      transition: transform 0.2s ease;
+    }
+
+    .tiktok-icon {
+      filter: brightness(0) invert(1);
+    }
+
+    .wa-icon {
+      filter: none;
+    }
+
+    .icon:hover {
+      transform: scale(1.2);
+    }
   </style>
 </head>
 
 <body>
+  <!-- Form & Konten Utama -->
   <div class="container" id="formPage">
     <div class="topbar">
       <div class="left">
@@ -283,13 +328,28 @@
           <input type="file" id="foto" accept="image/*">
 
           <label for="email">Email</label>
-          <input type="email" id="email" placeholder="Contoh: aditya@gmail.com">
+          <input type="email" id="email" placeholder="Contoh: aditya@gmail.com" required oninput="
+         if (!this.value.endsWith('.com')) {
+           this.setCustomValidity('Email harus diakhiri dengan .com');
+         } else {
+           this.setCustomValidity('');
+         }
+       ">
 
           <label for="wa">No. WhatsApp</label>
-          <input type="text" id="wa" placeholder="Contoh: 081234567890">
+          <input type="text" id="wa" placeholder="Contoh: 081234567890" maxlength="13" required oninput="
+         // Hapus semua karakter non-angka
+         this.value = this.value.replace(/[^0-9]/g, '');
+         // Jika input tidak dimulai dengan '0', kosongkan
+         if (this.value.length >= 1 && !this.value.startsWith('0')) {
+           alert('Nomor WhatsApp harus diawali dengan 0, bukan +62');
+           this.value = '';
+         }
+       ">
 
-          <label for="alamat">Alamat</label>
-          <input type="text" id="alamat" placeholder="Masukkan alamat lengkap sesuai KTP">
+          <label for="alamat">Alamat (sesuai KTP)</label>
+          <textarea id="alamat" placeholder="Masukkan alamat lengkap sesuai KTP" rows="3"></textarea>
+
 
           <label for="tiktok">Username TikTok</label>
           <input type="text" id="tiktok" placeholder="Contoh: @aditya.firmansyah">
@@ -297,8 +357,8 @@
           <h2 class="section-title">Package</h2>
           <div class="layanan">
             <div class="layanan-box">
-              <h4>Mahasiswa </h4>
-              <!-- <h4>Rp.500.000</h4> -->
+              <h4>Mahasiswa</h4>
+              <h4>Rp.1.500.000</h4>
               <div class="layanan-list">
                 <p>Akses penuh ke acara utama (seminar, talkshow, networking)</p>
                 <p>Kesempatan kenalan langsung dengan kreator & brand lokal</p>
@@ -306,13 +366,13 @@
                 <p>Sampel produk senilai Rp150.000 dengan komisi hingga 8%</p>
                 <p>Snack and lunch</p>
                 <p>Free Join Komunitas Tiktok</p>
-                <div class="package-total">Total Stok: <span id="stokReguler">10</span></div>
+                <!-- <div class="package-total">Total Stok: <span id="stokReguler">10</span></div> -->
               </div>
             </div>
 
             <div class="layanan-box">
-              <h4>VIP</h4>
-              <h4>Rp.1.500.000</h4>
+              <h4>REGULER </h4>
+              <h4>Rp250.000 </h4>
               <div class="layanan-list">
                 <p>Akses penuh ke acara utama (seminar, talkshow, networking)</p>
                 <p>Kesempatan kenalan langsung dengan kreator & brand lokal</p>
@@ -320,7 +380,7 @@
                 <p>Sampel produk senilai Rp250.000 dengan komisi hingga 8%</p>
                 <p>Snack and lunch reguler</p>
                 <p>Free Join Komunitas Tiktok</p>
-                <div class="package-total">Total Stok: <span id="stokVIP">5</span></div>
+                <!-- <div class="package-total">Total Stok: <span id="stokVIP">5</span></div> -->
               </div>
             </div>
           </div>
@@ -328,7 +388,7 @@
           <div class="layanan">
             <div class="layanan-box">
               <h4>VIP </h4>
-              <h4>Rp.2.500.000</h4>
+              <h4>Rp500.000 </h4>
               <div class="layanan-list">
                 <p>Tempat duduk prioritas VIP dan service excellent</p>
                 <p>Akses penuh ke acara utama (seminar, talkshow, networking)</p>
@@ -340,13 +400,13 @@
                 <p>Kolaborasi ekslusif dengan seller</p>
                 <p>Free Join Management Bisa Media MCN</p>
                 <p>Mendapatkan campaign eksklusif</p>
-                <div class="package-total">Total Stok: <span id="stokVVIP">2</span></div>
+                <!-- <div class="package-total">Total Stok: <span id="stokVVIP">2</span></div> -->
               </div>
             </div>
 
             <div class="layanan-box">
-              <h4>VVIP+</h4>
-              <h4>Rp.3.000.000</h4>
+              <h4>VVIP</h4>
+              <h4>Rp750.000</h4>
               <div class="layanan-list">
                 <p>Tempat duduk eksklusif di barisan VVIP dan service excellent</p>
                 <p>Akses penuh ke acara utama (seminar, talkshow, networking)</p>
@@ -360,22 +420,21 @@
                 <p>Kolaborasi eksklusif dengan seller</p>
                 <p>Free Join Management Bisa Media MCN</p>
                 <p>Mendapatkan campaign eksklusif</p>
-                <div class="package-total">Total Stok: <span id="stokVVIPPlus">1</span></div>
+                <!-- <div class="package-total">Total Stok: <span id="stokVVIPPlus">1</span></div> -->
               </div>
             </div>
           </div>
-
 
           <label for="paket">Paket</label>
           <select id="paket" onchange="showFields()">
             <option value="">Pilih Paket</option>
             <option value="Mahasiswa">Mahasiswa</option>
-            <option value="Reguler">Reguler</option>
+            <option value="Regular ">Regular</option>
             <option value="VIP">VIP</option>
             <option value="VVIP">VVIP</option>
           </select>
 
-          <!-- Upload KTM untuk Mahasiswa -->
+          <!-- Upload KTM -->
           <div id="ktmDiv" style="display:none;">
             <label for="ktm">Upload KTM</label>
             <input type="file" id="ktm" accept="image/*">
@@ -388,15 +447,12 @@
               <option value="">Pilih Kampus</option>
               <option value="Unsil">Unsil</option>
               <option value="Unper">Unper</option>
-              <option value="UIN">UIN</option>
-              <option value="ITB">ITB</option>
+              <option value="LP3I">LP3I</option>
+              <option value="Uncip">Uncip</option>
             </select>
           </div>
 
-          <label for="bukti">Bukti Pembayaran</label>
-          <input type="file" id="bukti" accept="image/*">
-
-          <button type="button" onclick="showPopup()">Kirim</button>
+          <button type="button" onclick="openPaymentPopup()">Kirim</button>
         </div>
       </div>
     </section>
@@ -412,47 +468,27 @@
         </a>
       </div>
     </footer>
+  </div>
 
-    <style>
-      footer {
-        text-align: center;
-        padding: 20px 10px;
-        background-color: #004aad;
-        /* biru utama */
-        color: #fff;
-        font-size: 14px;
-      }
-
-      .social-links {
-        margin-top: 10px;
-      }
-
-      .social-links a {
-        margin: 0 8px;
-        display: inline-block;
-      }
-
-      .icon {
-        width: 28px;
-        height: 28px;
-        transition: transform 0.2s ease;
-      }
-
-      .tiktok-icon {
-        filter: brightness(0) invert(1);
-        /* Putihkan TikTok biar kontras */
-      }
-
-      .wa-icon {
-        filter: none;
-        /* Biarkan hijau natural */
-      }
-
-      .icon:hover {
-        transform: scale(1.2);
-      }
-    </style>
-    
+  <!-- 🔹 Popup Payment -->
+  <div class="popup" id="paymentPopup">
+    <div class="popup-content">
+      <h3>Pembayaran Paket</h3>
+      <div class="popup-data" id="paymentData">
+        <p><b>Paket:</b> <span id="paymentPaket"></span></p>
+        <p><b>Harga:</b> <span id="paymentHarga"></span></p>
+        <label for="kupon">Masukkan Kupon</label>
+        <input type="text" id="kupon" placeholder="Kode Kupon">
+        <p><b>Scan QR untuk pembayaran:</b></p>
+        <img src="images/Gambar QRS.jpg" alt="QR Payment" style="width:200px; display:block; margin:10px auto;">
+        <label for="buktiPayment">Upload Bukti Pembayaran</label>
+        <input type="file" id="buktiPayment" accept="image/*">
+      </div>
+      <div style="text-align:center;">
+        <button class="yes" onclick="showConfirmation()">Konfirmasi Pembayaran</button>
+        <button class="no" onclick="closePaymentPopup()">Batal</button>
+      </div>
+    </div>
   </div>
 
   <!-- 🔹 Popup konfirmasi -->
@@ -478,66 +514,83 @@
   <script>
     function showFields() {
       const paket = document.getElementById("paket").value;
-      const ktmDiv = document.getElementById("ktmDiv");
-      const referralDiv = document.getElementById("referralDiv");
-
-      if (paket === "Mahasiswa") {
-        ktmDiv.style.display = "block";
-        referralDiv.style.display = "block";
-      } else {
-        ktmDiv.style.display = "none";
-        referralDiv.style.display = "none";
-      }
+      document.getElementById("ktmDiv").style.display = paket === "Mahasiswa" ? "block" : "none";
+      document.getElementById("referralDiv").style.display = paket === "Mahasiswa" ? "block" : "none";
     }
 
-    function showPopup() {
+    function openPaymentPopup() {
+      const paket = document.getElementById("paket").value;
+      if (!paket) {
+        alert("Silakan pilih paket terlebih dahulu!");
+        return;
+      }
+      document.getElementById("paymentPaket").innerText = paket;
+      let harga = "";
+      if (paket === "Mahasiswa") harga = "Rp.500.000";
+      else if (paket === "VIP") harga = "Rp.1.500.000";
+      else if (paket === "VVIP") harga = "Rp.2.500.000";
+      else if (paket === "VVIP+") harga = "Rp.3.000.000";
+      document.getElementById("paymentHarga").innerText = harga;
+      document.getElementById("paymentPopup").style.display = "flex";
+    }
+
+    function closePaymentPopup() {
+      document.getElementById("paymentPopup").style.display = "none";
+    }
+
+    function showConfirmation() {
+      const buktiFile = document.getElementById("buktiPayment").files[0];
+      if (!buktiFile) {
+        alert("Silakan upload bukti pembayaran terlebih dahulu!");
+        return;
+      }
+
       const name = document.getElementById("name").value;
       const email = document.getElementById("email").value;
       const wa = document.getElementById("wa").value;
       const alamat = document.getElementById("alamat").value;
       const tiktok = document.getElementById("tiktok").value;
       const paket = document.getElementById("paket").value;
-      const ktm = document.getElementById("ktm").files[0] ? document.getElementById("ktm").files[0].name : '-';
+      const fotoFile = document.getElementById("foto").files[0];
+      const ktmFile = document.getElementById("ktm").files[0];
       const referral = document.getElementById("referral").value || '-';
-      const foto = document.getElementById("foto").files[0] ? document.getElementById("foto").files[0].name : '-';
-      const bukti = document.getElementById("bukti").files[0] ? document.getElementById("bukti").files[0].name : '-';
 
-      if (!name || !email || !wa || !alamat || !tiktok || !paket) {
-        alert("Mohon lengkapi semua data sebelum mengirim!");
-        return;
-      }
+      const fotoURL = fotoFile ? URL.createObjectURL(fotoFile) : '';
+      const buktiURL = URL.createObjectURL(buktiFile);
+      const ktmURL = ktmFile ? URL.createObjectURL(ktmFile) : '';
 
-      const dataPreview = `
-        <b>Nama:</b> ${name}<br>
-        <b>Email:</b> ${email}<br>
-        <b>No. WhatsApp:</b> ${wa}<br>
-        <b>Alamat:</b> ${alamat}<br>
-        <b>Username TikTok:</b> ${tiktok}<br>
-        <b>Paket:</b> ${paket}<br>
-        <b>Foto Profil:</b> ${foto}<br>
-        <b>Bukti Pembayaran:</b> ${bukti}<br>
-        ${paket === "Mahasiswa" ? `<b>KTM:</b> ${ktm}<br><b>Info Referral:</b> ${referral}` : ''}
-      `;
+      document.getElementById("popupData").innerHTML = `
+    <b>Nama:</b> ${name}<br>
+    <b>Email:</b> ${email}<br>
+    <b>No. WhatsApp:</b> ${wa}<br>
+    <b>Alamat:</b> ${alamat}<br>
+    <b>Username TikTok:</b> ${tiktok}<br>
+    <b>Paket:</b> ${paket}<br>
+    ${fotoURL ? `<b>Foto Profil:</b><br><img src="${fotoURL}" alt="Foto Profil">` : ''}
+    <b>Bukti Pembayaran:</b><br><img src="${buktiURL}" alt="Bukti Payment">
+    ${paket === "Mahasiswa" ? `${ktmURL ? `<b>KTM:</b><br><img src="${ktmURL}" alt="KTM">` : ''}<br><b>Info Referral:</b> ${referral}` : ''}
+  `;
 
-      document.getElementById("popupData").innerHTML = dataPreview;
+      document.getElementById("paymentPopup").style.display = "none";
       document.getElementById("popup").style.display = "flex";
     }
+
+
 
     function closePopup() {
       document.getElementById("popup").style.display = "none";
     }
 
     function nextPage() {
-      document.getElementById("popup").style.display = "none";
       document.getElementById("formPage").style.display = "none";
       document.getElementById("successPage").style.display = "block";
-      window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
     function goBack() {
-      document.getElementById("successPage").style.display = "none";
       document.getElementById("formPage").style.display = "block";
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      document.getElementById("successPage").style.display = "none";
+      document.getElementById("popup").style.display = "none";
+      document.getElementById("paymentPopup").style.display = "none";
     }
   </script>
 </body>
