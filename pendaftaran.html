@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BISA MEDIA.MCN</title>
+  <link rel="icon" type="image/png" href="images/Logo_Bisa.png">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #f4f7fc;
+      display: flex;
+      justify-content: center;
+      color: #222;
+      scroll-behavior: smooth;
+    }
+
+    .container {
+      width: 50vw;
+      background: #fff;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      margin-bottom: 50px;
+    }
+
+    .topbar {
+      background-color: #004aad;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 25px;
+    }
+
+    .topbar img {
+      height: 35px;
+    }
+
+    .topbar h4 {
+      font-weight: 600;
+    }
+
+    .aduh {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      padding: 40px 40px;
+    }
+
+    .aduh img {
+      width: 100%;
+      max-width: 1080px;
+      border-radius: 14px;
+      border: 2px solid #004aad;
+    }
+
+    h2.section-title {
+      text-align: center;
+      font-size: 22px;
+      font-weight: 700;
+      color: #222;
+      margin-bottom: 25px;
+    }
+
+    .contact {
+      display: flex;
+      justify-content: center;
+      margin: 50px auto;
+      width: 80%;
+      max-width: 900px;
+    }
+
+    .contact-form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .contact-form label {
+      font-weight: 600;
+      color: #004aad;
+    }
+
+    .contact-form input,
+    .contact-form select {
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+    }
+
+
+    .contact-form button {
+      background-color: #25D366;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 16px;
+      transition: 0.2s;
+    }
+
+    .contact-form button:hover {
+      background-color: #1ebe5d;
+      transform: translateY(-2px);
+    }
+
+    footer {
+      background: #004aad;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      margin-top: 50px;
+    }
+
+    .layanan {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .layanan-box {
+      flex: 1;
+      min-width: 30%;
+      border: 1.5px solid #004aad;
+      border-radius: 10px;
+      text-align: center;
+      padding: 15px;
+      background: #fff;
+    }
+
+    .layanan-box h4 {
+      margin: 10px 0;
+      color: #004aad;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+
+    /* 🔹 Popup konfirmasi */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .popup-content {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      text-align: left;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+      animation: fadeInUp 0.4s ease;
+    }
+
+    .popup-content h3 {
+      text-align: center;
+      color: #004aad;
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+
+    .popup-data {
+      font-size: 15px;
+      color: #333;
+      line-height: 1.6;
+      background: #f9f9f9;
+      padding: 15px 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .popup-content button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      margin: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .popup-content .yes {
+      background: #25D366;
+      color: white;
+    }
+
+    .popup-content .no {
+      background: #ccc;
+    }
+
+    .success-page {
+      display: none;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .success-page h2 {
+      color: #004aad;
+      margin-bottom: 15px;
+    }
+
+    .success-page p {
+      font-size: 16px;
+      color: #333;
+    }
+
+    .success-page button {
+      background-color: #004aad;
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 8px;
+      margin-top: 25px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        width: 100vw;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container" id="formPage">
+    <div class="topbar">
+      <div class="left">
+        <img src="images/Logoyaa.png" alt="Logo">
+        <h4>BISA MEDIA.MCN</h4>
+      </div>
+    </div>
+
+    <section class="aduh">
+      <img src="images/Bagian1.jpg" alt="Sampul">
+    </section>
+
+    <section>
+      <h2 class="section-title">Form Pendaftaran</h2>
+      <div class="contact">
+        <div class="contact-form">
+          <label for="name">Nama</label>
+          <input type="text" id="name" placeholder="Masukkan nama lengkap">
+
+          <label for="foto">Foto Profil</label>
+          <input type="file" id="foto" accept="image/*">
+
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="Contoh: aditya@gmail.com">
+
+          <label for="wa">No. WhatsApp</label>
+          <input type="text" id="wa" placeholder="Contoh: 081234567890">
+
+          <label for="alamat">Alamat</label>
+          <input type="text" id="alamat" placeholder="Masukkan alamat lengkap sesuai KTP">
+
+          <label for="tiktok">Username TikTok</label>
+          <input type="text" id="tiktok" placeholder="Contoh: @aditya.firmansyah">
+
+          <h2 class="section-title">Package</h2>
+          <div class="layanan">
+            <div class="layanan-box">
+              <h4>Mahasiswa </h4>
+              <!-- <h4>Rp.500.000</h4> -->
+              <div class="layanan-list">
+                <p>Akses penuh ke acara utama (seminar, talkshow, networking)</p>
+                <p>Kesempatan kenalan langsung dengan kreator & brand lokal</p>
+                <p>E-sertifikat keikutsertaan</p>
+                <p>Sampel produk senilai Rp150.000 dengan komisi hingga 8%</p>
+                <p>Snack and lunch</p>
+                <p>Free Join Komunitas Tiktok</p>
+                <div class="package-total">Total Stok: <span id="stokReguler">10</span></div>
+              </div>
+            </div>
+
+            <div class="layanan-box">
+              <h4>VIP</h4>
+              <h4>Rp.1.500.000</h4>
+              <div class="layanan-list">
+                <p>Akses penuh ke acara utama (seminar, talkshow, networking)</p>
+                <p>Kesempatan kenalan langsung dengan kreator & brand lokal</p>
+                <p>E-sertifikat keikutsertaan</p>
+                <p>Sampel produk senilai Rp250.000 dengan komisi hingga 8%</p>
+                <p>Snack and lunch reguler</p>
+                <p>Free Join Komunitas Tiktok</p>
+                <div class="package-total">Total Stok: <span id="stokVIP">5</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="layanan">
+            <div class="layanan-box">
+              <h4>VIP </h4>
+              <h4>Rp.2.500.000</h4>
+              <div class="layanan-list">
+                <p>Tempat duduk prioritas VIP dan service excellent</p>
+                <p>Akses penuh ke acara utama (seminar, talkshow, networking)</p>
+                <p>Kesempatan kenalan langsung dengan kreator & brand lokal</p>
+                <p>Goodie bag dan Sampel produk senilai Rp500.000 dengan komisi hingga 10%</p>
+                <p>E-sertifikat keikutsertaan</p>
+                <p>Snack and lunch package VIP</p>
+                <p>Free Join Komunitas Tiktok</p>
+                <p>Kolaborasi ekslusif dengan seller</p>
+                <p>Free Join Management Bisa Media MCN</p>
+                <p>Mendapatkan campaign eksklusif</p>
+                <div class="package-total">Total Stok: <span id="stokVVIP">2</span></div>
+              </div>
+            </div>
+
+            <div class="layanan-box">
+              <h4>VVIP+</h4>
+              <h4>Rp.3.000.000</h4>
+              <div class="layanan-list">
+                <p>Tempat duduk eksklusif di barisan VVIP dan service excellent</p>
+                <p>Akses penuh ke acara utama (seminar, talkshow, networking)</p>
+                <p>Kesempatan kenalan langsung dengan kreator & brand lokal</p>
+                <p>Goodie bag dan Sampel produk 750.000 dengan komisi hingga 12%</p>
+                <p>E-sertifikat keikutsertaan</p>
+                <p>Snack and lunch VVIP</p>
+                <p>Konsultasi privat pasca-event dengan mentor Bisa Media</p>
+                <p>Free Join Komunitas Tiktok</p>
+                <p>Berpeluang satu meja makan dan sharing session dengan Kak Tiara</p>
+                <p>Kolaborasi eksklusif dengan seller</p>
+                <p>Free Join Management Bisa Media MCN</p>
+                <p>Mendapatkan campaign eksklusif</p>
+                <div class="package-total">Total Stok: <span id="stokVVIPPlus">1</span></div>
+              </div>
+            </div>
+          </div>
+
+
+          <label for="paket">Paket</label>
+          <select id="paket" onchange="showFields()">
+            <option value="">Pilih Paket</option>
+            <option value="Mahasiswa">Mahasiswa</option>
+            <option value="Reguler">Reguler</option>
+            <option value="VIP">VIP</option>
+            <option value="VVIP">VVIP</option>
+          </select>
+
+          <!-- Upload KTM untuk Mahasiswa -->
+          <div id="ktmDiv" style="display:none;">
+            <label for="ktm">Upload KTM</label>
+            <input type="file" id="ktm" accept="image/*">
+          </div>
+
+          <!-- Info Referral -->
+          <div id="referralDiv" style="display:none;">
+            <label for="referral">Info Referral</label>
+            <select id="referral">
+              <option value="">Pilih Kampus</option>
+              <option value="Unsil">Unsil</option>
+              <option value="Unper">Unper</option>
+              <option value="UIN">UIN</option>
+              <option value="ITB">ITB</option>
+            </select>
+          </div>
+
+          <label for="bukti">Bukti Pembayaran</label>
+          <input type="file" id="bukti" accept="image/*">
+
+          <button type="button" onclick="showPopup()">Kirim</button>
+        </div>
+      </div>
+    </section>
+
+    <footer>&copy; 2025 BISA MEDIA.MCN. All Rights Reserved.</footer>
+  </div>
+
+  <!-- 🔹 Popup konfirmasi -->
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <h3>Konfirmasi Data</h3>
+      <div class="popup-data" id="popupData"></div>
+      <div style="text-align:center;">
+        <button class="yes" onclick="nextPage()">Ya, data sudah benar</button>
+        <button class="no" onclick="closePopup()">Belum, periksa lagi</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🔹 Halaman Sukses -->
+  <div class="container success-page" id="successPage">
+    <h2>🎉 Pendaftaran Berhasil!</h2>
+    <p>Terima kasih telah mendaftar di <b>BISA MEDIA.MCN</b>.<br>
+      Kami akan segera menghubungi Anda melalui email atau WhatsApp.</p>
+    <button onclick="goBack()">Kembali ke Halaman Utama</button>
+  </div>
+
+  <script>
+    function showFields() {
+      const paket = document.getElementById("paket").value;
+      const ktmDiv = document.getElementById("ktmDiv");
+      const referralDiv = document.getElementById("referralDiv");
+
+      if (paket === "Mahasiswa") {
+        ktmDiv.style.display = "block";
+        referralDiv.style.display = "block";
+      } else {
+        ktmDiv.style.display = "none";
+        referralDiv.style.display = "none";
+      }
+    }
+
+    function showPopup() {
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const wa = document.getElementById("wa").value;
+      const alamat = document.getElementById("alamat").value;
+      const tiktok = document.getElementById("tiktok").value;
+      const paket = document.getElementById("paket").value;
+      const ktm = document.getElementById("ktm").files[0] ? document.getElementById("ktm").files[0].name : '-';
+      const referral = document.getElementById("referral").value || '-';
+      const foto = document.getElementById("foto").files[0] ? document.getElementById("foto").files[0].name : '-';
+      const bukti = document.getElementById("bukti").files[0] ? document.getElementById("bukti").files[0].name : '-';
+
+      if (!name || !email || !wa || !alamat || !tiktok || !paket) {
+        alert("Mohon lengkapi semua data sebelum mengirim!");
+        return;
+      }
+
+      const dataPreview = `
+        <b>Nama:</b> ${name}<br>
+        <b>Email:</b> ${email}<br>
+        <b>No. WhatsApp:</b> ${wa}<br>
+        <b>Alamat:</b> ${alamat}<br>
+        <b>Username TikTok:</b> ${tiktok}<br>
+        <b>Paket:</b> ${paket}<br>
+        <b>Foto Profil:</b> ${foto}<br>
+        <b>Bukti Pembayaran:</b> ${bukti}<br>
+        ${paket === "Mahasiswa" ? `<b>KTM:</b> ${ktm}<br><b>Info Referral:</b> ${referral}` : ''}
+      `;
+
+      document.getElementById("popupData").innerHTML = dataPreview;
+      document.getElementById("popup").style.display = "flex";
+    }
+
+    function closePopup() {
+      document.getElementById("popup").style.display = "none";
+    }
+
+    function nextPage() {
+      document.getElementById("popup").style.display = "none";
+      document.getElementById("formPage").style.display = "none";
+      document.getElementById("successPage").style.display = "block";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function goBack() {
+      document.getElementById("successPage").style.display = "none";
+      document.getElementById("formPage").style.display = "block";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  </script>
+</body>
+
+</html>
