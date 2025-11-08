@@ -41,6 +41,12 @@
       padding: 10px 25px;
     }
 
+    .topbar .left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
     .topbar img {
       height: 35px;
     }
@@ -93,7 +99,8 @@
     }
 
     .contact-form input,
-    .contact-form select {
+    .contact-form select,
+    .contact-form textarea {
       padding: 12px;
       border-radius: 8px;
       border: 1px solid #ccc;
@@ -205,9 +212,7 @@
       border-radius: 10px;
       margin-bottom: 20px;
       max-height: 300px;
-      /* tinggi maksimum container popup */
       overflow-y: auto;
-      /* scroll vertical jika konten melebihi tinggi */
     }
 
     .popup-data img {
@@ -215,7 +220,6 @@
       width: 100px;
       border-radius: 8px;
       margin: 10px auto;
-      /* gambar di tengah */
     }
 
     .popup-content button {
@@ -280,6 +284,7 @@
       .container {
         width: 100vw;
       }
+
       .layanan {
         flex-direction: column;
       }
@@ -289,7 +294,6 @@
       }
     }
 
-    /* Footer social */
     footer {
       text-align: center;
       padding: 20px 10px;
@@ -333,7 +337,7 @@
     <div class="topbar">
       <div class="left">
         <img src="images/Logoyaa.png" alt="Logo">
-        <h4>BISA MEDIA.MCN</h4>
+        <h4>BISA MEDIA</h4>
       </div>
     </div>
 
@@ -362,9 +366,7 @@
 
           <label for="wa">No. WhatsApp</label>
           <input type="text" id="wa" placeholder="Contoh: 081234567890" maxlength="13" required oninput="
-         // Hapus semua karakter non-angka
          this.value = this.value.replace(/[^0-9]/g, '');
-         // Jika input tidak dimulai dengan '0', kosongkan
          if (this.value.length >= 1 && !this.value.startsWith('0')) {
            alert('Nomor WhatsApp harus diawali dengan 0, bukan +62');
            this.value = '';
@@ -373,7 +375,6 @@
 
           <label for="alamat">Alamat (sesuai KTP)</label>
           <textarea id="alamat" placeholder="Masukkan alamat lengkap sesuai KTP" rows="3"></textarea>
-
 
           <label for="tiktok">Username TikTok</label>
           <input type="text" id="tiktok" placeholder="Contoh: @aditya.firmansyah">
@@ -390,13 +391,12 @@
                 <p>Sampel produk senilai Rp150.000 dengan komisi hingga 8%</p>
                 <p>Snack and lunch</p>
                 <p>Free Join Komunitas Tiktok</p>
-                <!-- <div class="package-total">Total Stok: <span id="stokReguler">10</span></div> -->
               </div>
             </div>
 
             <div class="layanan-box">
-              <h4>REGULER </h4>
-              <h4>Rp250.000 </h4>
+              <h4>REGULER</h4>
+              <h4>Rp250.000</h4>
               <div class="layanan-list">
                 <p>Akses penuh ke acara utama (seminar, talkshow, networking)</p>
                 <p>Kesempatan kenalan langsung dengan kreator & brand lokal</p>
@@ -404,15 +404,14 @@
                 <p>Sampel produk senilai Rp250.000 dengan komisi hingga 8%</p>
                 <p>Snack and lunch reguler</p>
                 <p>Free Join Komunitas Tiktok</p>
-                <!-- <div class="package-total">Total Stok: <span id="stokVIP">5</span></div> -->
               </div>
             </div>
           </div>
 
           <div class="layanan">
             <div class="layanan-box">
-              <h4>VIP </h4>
-              <h4>Rp500.000 </h4>
+              <h4>VIP</h4>
+              <h4>Rp500.000</h4>
               <div class="layanan-list">
                 <p>Tempat duduk prioritas VIP dan service excellent</p>
                 <p>Akses penuh ke acara utama (seminar, talkshow, networking)</p>
@@ -424,7 +423,6 @@
                 <p>Kolaborasi ekslusif dengan seller</p>
                 <p>Free Join Management Bisa Media MCN</p>
                 <p>Mendapatkan campaign eksklusif</p>
-                <!-- <div class="package-total">Total Stok: <span id="stokVVIP">2</span></div> -->
               </div>
             </div>
 
@@ -444,7 +442,6 @@
                 <p>Kolaborasi eksklusif dengan seller</p>
                 <p>Free Join Management Bisa Media MCN</p>
                 <p>Mendapatkan campaign eksklusif</p>
-                <!-- <div class="package-total">Total Stok: <span id="stokVVIPPlus">1</span></div> -->
               </div>
             </div>
           </div>
@@ -453,7 +450,7 @@
           <select id="paket" onchange="showFields()">
             <option value="">Pilih Paket</option>
             <option value="Mahasiswa">Mahasiswa</option>
-            <option value="Regular ">Regular</option>
+            <option value="REGULER">REGULER</option>
             <option value="VIP">VIP</option>
             <option value="VVIP">VVIP</option>
           </select>
@@ -518,24 +515,36 @@
   <!-- 🔹 Popup konfirmasi -->
   <div class="popup" id="popup">
     <div class="popup-content">
-      <h3>Konfirmasi Data</h3>
       <div class="popup-data" id="popupData"></div>
       <div style="text-align:center;">
-        <button class="yes" onclick="nextPage()">Ya, data sudah benar</button>
+        <button class="yes" onclick="goToSuccess()">Ya, data sudah benar</button>
         <button class="no" onclick="closePopup()">Belum, periksa lagi</button>
       </div>
     </div>
   </div>
 
-  <!-- 🔹 Halaman Sukses -->
-  <div class="container success-page" id="successPage">
+  <!-- Halaman Sukses -->
+  <div class="container success-page" id="successPage" style="display:none;">
     <h2>🎉 Pendaftaran Berhasil!</h2>
-    <p>Terima kasih telah mendaftar di <b>BISA MEDIA.MCN</b>.<br>
-      Kami akan segera menghubungi Anda melalui email atau WhatsApp.</p>
-    <button onclick="goBack()">Kembali ke Halaman Utama</button>
+    <p>Terima kasih telah melakukan pendaftaran.</p>
+    <p>Untuk menyelesaikan proses, silakan konfirmasi pembayaran Anda ke Admin melalui WhatsApp di bawah ini.</p>
+
+    <a id="waLink" href="#" class="wa-button" target="_blank"
+      style="display:inline-block; background:#25D366; color:white; padding:12px 25px; border-radius:8px; font-weight:600; text-decoration:none; margin-top:15px;">
+      Konfirmasi ke Admin via WhatsApp
+    </a>
+
+    <br>
+
+    <button onclick="goBack()"
+      style="background-color:#004aad; color:white; border:none; padding:10px 25px; border-radius:8px; margin-top:15px; cursor:pointer; font-size:15px;">
+      Kembali ke Halaman Awal
+    </button>
   </div>
 
   <script>
+    const adminNumber = "6287847687691"; // nomor WA admin
+
     function showFields() {
       const paket = document.getElementById("paket").value;
       document.getElementById("ktmDiv").style.display = paket === "Mahasiswa" ? "block" : "none";
@@ -549,11 +558,24 @@
         return;
       }
       document.getElementById("paymentPaket").innerText = paket;
+
       let harga = "";
-      if (paket === "Mahasiswa") harga = "Rp.500.000";
-      else if (paket === "VIP") harga = "Rp.1.500.000";
-      else if (paket === "VVIP") harga = "Rp.2.500.000";
-      else if (paket === "VVIP+") harga = "Rp.3.000.000";
+      switch (paket) {
+        case "Mahasiswa":
+          harga = "Rp.1.500.000";
+          break;
+        case "REGULER":
+          harga = "Rp.250.000";
+          break;
+        case "VIP":
+          harga = "Rp.500.000";
+          break;
+        case "VVIP":
+          harga = "Rp.750.000";
+          break;
+        default:
+          harga = "-";
+      }
       document.getElementById("paymentHarga").innerText = harga;
       document.getElementById("paymentPopup").style.display = "flex";
     }
@@ -599,15 +621,19 @@
       document.getElementById("popup").style.display = "flex";
     }
 
-
-
     function closePopup() {
       document.getElementById("popup").style.display = "none";
     }
 
-    function nextPage() {
+    function goToSuccess() {
+      const name = document.getElementById("name").value;
+      const paket = document.getElementById("paket").value;
+      const waText = `Halo admin, saya ${name} sudah melakukan pembayaran untuk EVENT SIPALING AFFILIATE dengan paket ${paket}.`;
+      document.getElementById("waLink").href = `https://wa.me/${adminNumber}?text=${encodeURIComponent(waText)}`;
+
       document.getElementById("formPage").style.display = "none";
       document.getElementById("successPage").style.display = "block";
+      document.getElementById("popup").style.display = "none";
     }
 
     function goBack() {
